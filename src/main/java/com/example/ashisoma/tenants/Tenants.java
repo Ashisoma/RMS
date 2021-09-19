@@ -1,6 +1,6 @@
-package com.example.ashisoma.comrade;
+package com.example.ashisoma.tenants;
 
-public class Comrade {
+public class Tenants {
     Long comrade_id;
     String f_name;
     String l_name;
