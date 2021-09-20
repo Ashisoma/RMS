@@ -1,4 +1,4 @@
-package com.example.ashisoma.web;
+package com.example.rms.web;
 
 public class TenantController {
 }
