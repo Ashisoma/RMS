@@ -1,4 +1,4 @@
-package com.example.ashisoma.domain;
+package com.example.rms.domain;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

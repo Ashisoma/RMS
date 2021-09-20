@@ -1,6 +1,6 @@
-package com.example.ashisoma.repository;
+package com.example.rms.repository;
 
-import com.example.ashisoma.domain.Payment;
+import com.example.rms.domain.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
