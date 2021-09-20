@@ -1,13 +1,13 @@
-package com.example.ashisoma;
+package com.example.rms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RmsApplication {
+public class RentalManagementSystemApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RmsApplication.class, args);
+		SpringApplication.run(RentalManagementSystemApplication.class, args);
 	}
 
 }
