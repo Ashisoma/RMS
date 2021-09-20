@@ -1,4 +1,4 @@
-package com.example.ashisoma.administrator;
+package com.example.ashisoma.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;

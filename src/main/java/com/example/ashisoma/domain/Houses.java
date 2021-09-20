@@ -1,6 +1,4 @@
-package com.example.ashisoma.houses;
-
-import com.example.ashisoma.administrator.Admin;
+package com.example.ashisoma.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

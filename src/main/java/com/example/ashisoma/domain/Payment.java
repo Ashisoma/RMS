@@ -1,4 +1,4 @@
-package com.example.ashisoma.payments;
+package com.example.ashisoma.domain;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

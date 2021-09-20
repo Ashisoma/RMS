@@ -1,4 +1,4 @@
-package com.example.ashisoma.invoices;
+package com.example.ashisoma.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
