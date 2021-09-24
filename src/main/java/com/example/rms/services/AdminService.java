@@ -4,8 +4,10 @@ import com.example.rms.domain.Admin;
 import com.example.rms.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -34,7 +36,6 @@ public class AdminService {
     // ADD
     // AN ADMIN
     public void addNewAdmin(Admin admin) {
-
         Optional<Admin> adminByNatId, adminByNatId2;
         adminByNatId = adminRepository.findByNationalId(admin.getNational_id());
         adminByNatId2 = adminRepository.findByEmail(admin.getEmail());
@@ -51,9 +52,53 @@ public class AdminService {
     }
     // UPDATE
 
+    @Transactional
+    public void updateStudent(Long adminId, String fname, String lname, String email, String gender, Integer nationalId, String password) {
+        Admin admin = adminRepository.findById(adminId).orElseThrow( () ->
+                new IllegalStateException("Admin with id :" + adminId + "does not exist"));
+        if (fname != null && fname.length()>0 && !Objects.equals(admin.getF_name(), fname))
+        {
+            admin.setF_name(fname);
+        }
+        if (lname != null && lname.length()>0 && !Objects.equals(admin.getS_name(), lname))
+        {
+            admin.setS_name(lname);
+        }
+        if (gender != null && gender.length()>0 && !Objects.equals(admin.getGender(), gender))
+        {
+            admin.setGender(gender);
+        }
+
+        if (email != null && email.length()>0 && !Objects.equals(admin.getEmail(),email)){
+            Optional<Admin> adminOptional = adminRepository.findByEmail(email);
+            if (adminOptional.isPresent()){
+                throw new IllegalStateException("Email is taken");
+            }
+            admin.setEmail(email);
+        }
+        if (nationalId != null && nationalId > 0 && !Objects.equals(admin.getNational_id(),nationalId)){
+            Optional<Admin> adminOptional2 = adminRepository.findByEmail(email);
+            if (adminOptional2.isPresent()){
+                throw new IllegalStateException("National id already exists");
+            }
+            admin.setNational_id(nationalId);
+        }
+        if (password != null && password.length()>0 && !Objects.equals(admin.getPassword(),password)){
+            Optional<Admin> adminOptional3 = adminRepository.findByEmail(email);
+            if (adminOptional3.isPresent()){
+                throw new IllegalStateException("New password can not be same as old password");
+            }
+            admin.setPassword(password);
+        }
+    }
+
     // DELETE
-    public void deleteAdmin(Admin admin){
-        adminRepository.delete(admin);
+    public void deleteAdminById(Long adminId){
+        boolean admin_exists = adminRepository.existsById(adminId);
+        if(!admin_exists){
+            throw new IllegalStateException("Admin with id "+ adminId + " does not exist");
+        }
+        adminRepository.deleteById(adminId);
     }
 
 }

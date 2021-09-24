@@ -12,4 +12,6 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
 
     @Query("SELECT a FROM Admin a WHERE a.nationalId=?1" )
     Optional<Admin> findByNationalId(Integer natId);
+
+
 }
