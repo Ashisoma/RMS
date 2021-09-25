@@ -24,7 +24,7 @@ This spring boot application with Postgresql database. It is a rental management
   https://github.com/Ashisoma/RMS
   
 ## Known bugs
-- If there seem to be any other bugs on the web app, do reach via ashisomaokali@gmail.com
+- If there seem to be any other bugs on the web app, do reach via ashisomaokal@gmail.com
 
 ## Licence and copyright 
 The app is under the :
