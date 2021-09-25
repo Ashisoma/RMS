@@ -4,10 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Table
 @Entity
-public class Houses {
+public class Houses extends Admin{
 
     @Id
     @Column(name = "id",unique = true, nullable = false)
@@ -15,6 +16,7 @@ public class Houses {
 
     @Column(name = "house_number",nullable = false)
     private String houseNumber;
+
 
     @Column(name = "features",nullable = false)
     private String features;
@@ -26,6 +28,16 @@ public class Houses {
     private boolean isOccupied;
 
     public Houses() {
+    }
+
+    // inheritance in spring boot to get data from the two tables and display for the house, admin, tenant, payments
+    public Houses(String f_name, String s_name, Integer national_id, String email, String password, LocalDate sign_up_date, boolean emailConfirmed, String gender, Long id, String houseNumber, String features, Float rent, boolean isOccupied) {
+        super(f_name, s_name, national_id, email, password, sign_up_date, emailConfirmed, gender);
+        this.id = id;
+        this.houseNumber = houseNumber;
+        this.features = features;
+        this.rent = rent;
+        this.isOccupied = isOccupied;
     }
 
     public Houses(Long id, String houseNumber, String features, Float rent, boolean isOccupied) {

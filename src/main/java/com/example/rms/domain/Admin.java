@@ -22,7 +22,7 @@ public class Admin {
     private String s_name;
 
     @Column(name = "national_id", unique = true, nullable = false, length = 8)
-    private Integer national_id;
+    private Integer nationalId;
 
     @Column(name = "email", unique = true, nullable = false, length = 20)
     private String email;
@@ -46,7 +46,7 @@ public class Admin {
         this.id = id;
         this.f_name = f_name;
         this.s_name = s_name;
-        this.national_id = national_id;
+        this.nationalId = national_id;
         this.email = email;
         this.password = password;
         this.signUpDate = sign_up_date;
@@ -57,7 +57,7 @@ public class Admin {
     public Admin(String f_name, String s_name, Integer national_id, String email, String password, LocalDate sign_up_date, boolean emailConfirmed, String gender) {
         this.f_name = f_name;
         this.s_name = s_name;
-        this.national_id = national_id;
+        this.nationalId = national_id;
         this.email = email;
         this.password = password;
         this.signUpDate = sign_up_date;
@@ -71,7 +71,7 @@ public class Admin {
                 "id=" + id +
                 ", f_name='" + f_name + '\'' +
                 ", s_name='" + s_name + '\'' +
-                ", national_id=" + national_id +
+                ", national_id=" + nationalId +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", sign_up_date=" + signUpDate +
@@ -96,12 +96,12 @@ public class Admin {
         this.s_name = s_name;
     }
 
-    public Integer getNational_id() {
-        return national_id;
+    public Integer getNationalId() {
+        return nationalId;
     }
 
-    public void setNational_id(Integer national_id) {
-        this.national_id = national_id;
+    public void setNationalId(Integer nationalId) {
+        this.nationalId = nationalId;
     }
 
     public String getEmail() {

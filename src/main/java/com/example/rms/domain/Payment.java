@@ -7,6 +7,8 @@ import java.sql.Timestamp;
 @Table
 public class Payment {
 
+    // todo : here there is also need for inheritance and many to many implementation
+
     @SequenceGenerator(
             name = "payment_sequence",
             sequenceName = "payment_sequence",
