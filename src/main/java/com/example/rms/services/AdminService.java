@@ -92,13 +92,13 @@ public class AdminService {
         }
     }
 
-    // DELETE
-    public void deleteAdminById(Long adminId){
-        boolean admin_exists = adminRepository.existsById(adminId);
-        if(!admin_exists){
-            throw new IllegalStateException("Admin with id "+ adminId + " does not exist");
+        // DELETE
+        public void deleteAdminById(Long adminId){
+            boolean admin_exists = adminRepository.existsById(adminId);
+            if(!admin_exists){
+                throw new IllegalStateException("Admin with id "+ adminId + " does not exist");
+            }
+            adminRepository.deleteById(adminId);
         }
-        adminRepository.deleteById(adminId);
-    }
 
 }
