@@ -1,10 +1,9 @@
 package com.example.rms.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table
 @Entity
@@ -17,7 +16,6 @@ public class Houses extends Admin{
     @Column(name = "house_number",nullable = false)
     private String houseNumber;
 
-
     @Column(name = "features",nullable = false)
     private String features;
 
@@ -27,18 +25,30 @@ public class Houses extends Admin{
     @Column(name = "is_occupied",nullable = false)
     private boolean isOccupied;
 
+    @ManyToOne
+    @JoinColumn(name = "owned_by_id")
+    private Admin ownedBy;
+
+    public Admin getOwnedBy() {
+        return ownedBy;
+    }
+
+    // TODO: 25/10/2021 finish this editing
+    @ManyToOne
+    @JoinColumn(name = "tenant_id")
+    private Tenants tenant;
+
+    public Tenants getTenant() {
+        return tenant;
+    }
+
+
+    private List<Payment> paymentsMade = new ArrayList<>();
+
     public Houses() {
     }
 
-    // inheritance in spring boot to get data from the two tables and display for the house, admin, tenant, payments
-    public Houses(String f_name, String s_name, Integer national_id, String email, String password, LocalDate sign_up_date, boolean emailConfirmed, String gender, Long id, String houseNumber, String features, Float rent, boolean isOccupied) {
-        super(f_name, s_name, national_id, email, password, sign_up_date, emailConfirmed, gender);
-        this.id = id;
-        this.houseNumber = houseNumber;
-        this.features = features;
-        this.rent = rent;
-        this.isOccupied = isOccupied;
-    }
+    // todo inheritance in spring boot to get data from the two tables and display for the house, admin, tenant, payments
 
     public Houses(Long id, String houseNumber, String features, Float rent, boolean isOccupied) {
         this.id = id;

@@ -53,7 +53,7 @@ public class AdminService {
     // UPDATE
 
     @Transactional
-    public void updateStudent(Long adminId, String fname, String lname, String email, String gender, Integer nationalId, String password) {
+    public void updateAdmin(Long adminId, String fname, String lname, String email, String gender, Integer nationalId, String password) {
         Admin admin = adminRepository.findById(adminId).orElseThrow( () ->
                 new IllegalStateException("Admin with id :" + adminId + "does not exist"));
         if (fname != null && fname.length()>0 && !Objects.equals(admin.getF_name(), fname))

@@ -1,21 +1,21 @@
 package com.example.rms.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Table(name = "invoices")
 @Entity
 public class Invoices {
 
-//    todo to add the constructor
+//    todo to do one to on with the tenant clas
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "tenant_id", nullable = false, unique = true)
-    private Long tenantId;
+
+    @JoinColumn
+    @OneToOne
+    private Tenants tenantId;
+
     @Column(name = "date_added", nullable = false)
     private LocalDate dateAdded;
     @Column(name = "due_date", nullable = false)
@@ -43,11 +43,21 @@ public class Invoices {
                 '}';
     }
 
-    public Long getTenantId() {
+    public Invoices(Long id, LocalDate dateAdded, LocalDate dueDate, String particulars, Float amount, boolean isPaid, Long houseId) {
+        this.id = id;
+        this.dateAdded = dateAdded;
+        this.dueDate = dueDate;
+        this.particulars = particulars;
+        this.amount = amount;
+        this.isPaid = isPaid;
+        this.houseId = houseId;
+    }
+
+    public Tenants getTenantId() {
         return tenantId;
     }
 
-    public void setTenantId(Long tenantId) {
+    public void setTenantId(Tenants tenantId) {
         this.tenantId = tenantId;
     }
 

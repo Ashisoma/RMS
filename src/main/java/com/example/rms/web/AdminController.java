@@ -1,7 +1,6 @@
 package com.example.rms.web;
 
 import com.example.rms.domain.Admin;
-import com.example.rms.repository.AdminRepository;
 import com.example.rms.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +50,7 @@ public class AdminController {
                             @RequestParam(required = false)String gender,
                             @RequestParam(required = false)Integer nationalId,
                             @RequestParam(required = false) String password){
-        adminService.updateStudent(adminId,fname,lname,email,gender,nationalId,password);
+        adminService.updateAdmin(adminId,fname,lname,email,gender,nationalId,password);
     }
 
     // DELETE
