@@ -50,6 +50,7 @@ public class AdminController {
                             @RequestParam(required = false)String gender,
                             @RequestParam(required = false)Integer nationalId,
                             @RequestParam(required = false) String password){
+        // you can't update the admin coz the columns are nullable  = fa;se
         adminService.updateAdmin(adminId,fname,lname,email,gender,nationalId,password);
     }
 
