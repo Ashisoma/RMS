@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Entity
-public class Houses extends Admin{
+public class Houses {
 
     @Id
     @Column(name = "id",unique = true, nullable = false)
@@ -25,30 +25,32 @@ public class Houses extends Admin{
     @Column(name = "is_occupied",nullable = false)
     private boolean isOccupied;
 
+
+    // RELATIONSHIP
     @ManyToOne
-    @JoinColumn(name = "owned_by_id")
+    @JoinColumn(name = "owned_by_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "admin_house_fk"
+            )
+    )
     private Admin ownedBy;
 
-    public Admin getOwnedBy() {
-        return ownedBy;
-    }
-
     // TODO: 25/10/2021 finish this editing
-    @ManyToOne
-    @JoinColumn(name = "tenant_id")
+    @OneToOne
+    @JoinColumn(name = "tenant_id",
+            referencedColumnName = "id"
+    )
     private Tenants tenant;
 
-    public Tenants getTenant() {
-        return tenant;
-    }
-
-
+    @OneToMany(
+            mappedBy = "houses",
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
+    )
     private List<Payment> paymentsMade = new ArrayList<>();
 
     public Houses() {
     }
-
-    // todo inheritance in spring boot to get data from the two tables and display for the house, admin, tenant, payments
 
     public Houses(Long id, String houseNumber, String features, Float rent, boolean isOccupied) {
         this.id = id;
@@ -74,6 +76,22 @@ public class Houses extends Admin{
                 ", rent=" + rent +
                 ", isOccupied=" + isOccupied +
                 '}';
+    }
+
+    public void setOwnedBy(Admin ownedBy) {
+        this.ownedBy = ownedBy;
+    }
+
+    public void setTenant(Tenants tenant) {
+        this.tenant = tenant;
+    }
+
+    public List<Payment> getPaymentsMade() {
+        return paymentsMade;
+    }
+
+    public void setPaymentsMade(List<Payment> paymentsMade) {
+        this.paymentsMade = paymentsMade;
     }
 
     public Long getId() {
@@ -115,4 +133,13 @@ public class Houses extends Admin{
     public void setOccupied(boolean occupied) {
         isOccupied = occupied;
     }
+
+    public Tenants getTenant() {
+        return tenant;
+    }
+
+    public Admin getOwnedBy() {
+        return ownedBy;
+    }
+
 }

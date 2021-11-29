@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Table
 @Entity
-public class Tenants {
+public class    Tenants {
 
     @SequenceGenerator(
             name = "tenant_sequence",
@@ -31,11 +31,19 @@ public class Tenants {
     @Column(nullable = false, length = 20)
     private String password;
     @Column(nullable = false)
-    private LocalDate SignUpDate;
+    private LocalDate signUpDate;
     @Column(nullable = false, length = 1)
     private int emailConfirmed;
     @Column(nullable = false, length = 10)
-    private String Gender;
+    private String gender;
+
+    @OneToOne
+    @JoinColumn(name = "houses_id",
+            referencedColumnName = "id"
+    )
+    private Houses houses;
+
+
 
     public Tenants() {
     }
@@ -46,9 +54,9 @@ public class Tenants {
         this.phone_number = phone_number;
         this.email = email;
         this.password = password;
-        SignUpDate = signUpDate;
+        this.signUpDate = signUpDate;
         this.emailConfirmed = emailConfirmed;
-        Gender = gender;
+        this.gender = gender;
     }
 
     @Override
@@ -60,12 +68,15 @@ public class Tenants {
                 ", phone_number=" + phone_number +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", SignUpDate=" + SignUpDate +
+                ", SignUpDate=" + signUpDate +
                 ", emailConfirmed=" + emailConfirmed +
-                ", Gender='" + Gender + '\'' +
+                ", Gender='" + gender + '\'' +
                 '}';
     }
 
+    public Houses getHouses() {
+        return houses;
+    }
     public Long getId() {
         return id;
     }
@@ -115,11 +126,11 @@ public class Tenants {
     }
 
     public LocalDate getSignUpDate() {
-        return SignUpDate;
+        return signUpDate;
     }
 
     public void setSignUpDate(LocalDate signUpDate) {
-        SignUpDate = signUpDate;
+        this.signUpDate = signUpDate;
     }
 
     public int getEmailConfirmed() {
@@ -131,11 +142,11 @@ public class Tenants {
     }
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
     public void setGender(String gender) {
-        Gender = gender;
+        this.gender = gender;
     }
 
     //    String

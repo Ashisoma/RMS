@@ -39,6 +39,25 @@ public class Payment {
     @Column(unique = true, nullable = false)
     private String comment;
 
+    // RELATIONSHIP
+    @ManyToOne
+    @JoinColumn(name = "houses_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "houses_payment_fk"
+            )
+    )
+    private Houses houses;
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "houses_payment_fk"
+            )
+    )
+    private  Admin admin;
+
     public Payment() {
     }
 
@@ -69,6 +88,22 @@ public class Payment {
                 ", amountPayed=" + amountPayed +
                 ", comment='" + comment + '\'' +
                 '}';
+    }
+
+    public Houses getHouses() {
+        return houses;
+    }
+
+    public void setHouses(Houses houses) {
+        this.houses = houses;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 
     public Long getId() {
