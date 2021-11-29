@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table
+
 @Entity
 public class Houses extends Admin{
 
