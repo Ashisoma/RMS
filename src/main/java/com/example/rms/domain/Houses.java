@@ -78,6 +78,7 @@ public class Houses {
                 '}';
     }
 
+
     public void setOwnedBy(Admin ownedBy) {
         this.ownedBy = ownedBy;
     }
