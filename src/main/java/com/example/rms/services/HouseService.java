@@ -1,12 +1,10 @@
 package com.example.rms.services;
 
 import com.example.rms.domain.Houses;
-import com.example.rms.domain.Tenants;
 import com.example.rms.repository.HousesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -27,14 +25,14 @@ public class HouseService {
         return housesRepository.findAll();
     }
         // BY ID
-    public Optional<Houses> findAdminById(Long id){
+    public Optional<Houses> findHouseById(Long id){
         return housesRepository.findById(id);
     }
         // BY RENT
     public List<Houses> findQueryRent(String rent){
         return housesRepository.searchQueryByRent(rent);
     }
-    //SORT BY RENT
+    //TODO SORT BY RENT
         // GET VACANT HOUSES
         public List<Houses> getAllVacantHouses(){
         return  housesRepository.findTheVacantHouses();

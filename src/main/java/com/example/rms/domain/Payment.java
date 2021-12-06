@@ -2,6 +2,7 @@ package com.example.rms.domain;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -25,18 +26,18 @@ public class Payment {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private Long tenantId;
+    private String tenantName;
 
     @Column(unique = true, nullable = false)
     private String houseNumber;
 
     @Column(unique = true, nullable = false)
-    private Timestamp timestamp;
+    private LocalDateTime timestamp;
 
     @Column(unique = true, nullable = false)
     private Float amountPayed;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String comment;
 
     // RELATIONSHIP
@@ -61,17 +62,17 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Long id, Long tenantId, String houseNumber, Timestamp timestamp, Float amountPayed, String comment) {
+    public Payment(Long id, String tenantName, String houseNumber, LocalDateTime timestamp, Float amountPayed, String comment) {
         this.id = id;
-        this.tenantId = tenantId;
+        this.tenantName = tenantName;
         this.houseNumber = houseNumber;
         this.timestamp = timestamp;
         this.amountPayed = amountPayed;
         this.comment = comment;
     }
 
-    public Payment(Long tenantId, String houseNumber, Timestamp timestamp, Float amountPayed, String comment) {
-        this.tenantId = tenantId;
+    public Payment(String tenantName, String houseNumber, LocalDateTime timestamp, Float amountPayed, String comment) {
+        this.tenantName = tenantName;
         this.houseNumber = houseNumber;
         this.timestamp = timestamp;
         this.amountPayed = amountPayed;
@@ -82,7 +83,7 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "id=" + id +
-                ", tenantId=" + tenantId +
+                ", tenantName=" + tenantName +
                 ", houseNumber='" + houseNumber + '\'' +
                 ", timestamp=" + timestamp +
                 ", amountPayed=" + amountPayed +
@@ -114,12 +115,12 @@ public class Payment {
         this.id = id;
     }
 
-    public Long getTenantId() {
-        return tenantId;
+    public String getTenantName() {
+        return tenantName;
     }
 
-    public void setTenantId(Long tenantId) {
-        this.tenantId = tenantId;
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
     }
 
     public String getHouseNumber() {
@@ -130,11 +131,11 @@ public class Payment {
         this.houseNumber = houseNumber;
     }
 
-    public Timestamp getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
