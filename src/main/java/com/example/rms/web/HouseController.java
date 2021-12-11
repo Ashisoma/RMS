@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping(path = "api/v1/rms/house")
 public class HouseController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class HouseController {
 
     // this one might not work we'd have to turn the query from string to integer or float
     @GetMapping(path = "/rent/{rent}")
-    public List<Houses> findByRent(@PathVariable("rent") String rent){
+    public List<Houses> findByRent(@PathVariable("rent") Float rent){
         return service.findQueryRent(rent);
     }
 

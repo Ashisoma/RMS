@@ -43,6 +43,9 @@ public class Invoices {
                 '}';
     }
 
+    public Invoices() {
+    }
+
     public Invoices(Long id, LocalDate dateAdded, LocalDate dueDate, String particulars, Float amount, boolean isPaid, Long houseId) {
         this.id = id;
         this.dateAdded = dateAdded;

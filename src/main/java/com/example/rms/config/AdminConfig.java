@@ -43,9 +43,9 @@ public class AdminConfig {
                     LocalDate.of(1999, 12,25),
                     true,
                     "Male");
-            adminRepository.saveAll(
-                    List.of(landlord1,Cornel,Phillip)
-            );
+//            adminRepository.saveAll(
+//                    List.of(landlord1,Cornel,Phillip)
+//            );
         };
     }
 }

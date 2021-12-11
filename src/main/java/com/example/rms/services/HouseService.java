@@ -29,7 +29,7 @@ public class HouseService {
         return housesRepository.findById(id);
     }
         // BY RENT
-    public List<Houses> findQueryRent(String rent){
+    public List<Houses> findQueryRent(Float rent){
         return housesRepository.searchQueryByRent(rent);
     }
     //TODO SORT BY RENT
@@ -39,7 +39,7 @@ public class HouseService {
         }
         // GET TAKEN HOUSES
         public List<Houses> getTheOccupiedHouses(){
-            return  housesRepository.findTheOccupiedHouses();
+            return  housesRepository.findAllOccupiedHouses();
         }
       //POST FUNCTIONS
       // ADD A HOUSE

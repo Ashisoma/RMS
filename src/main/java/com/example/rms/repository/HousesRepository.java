@@ -9,12 +9,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HousesRepository extends JpaRepository<Houses, Long> {
-    @Query("SELECT * FROM Houses WHERE isOccupied=false" )
+
+
+    @Query("select h from Houses h where h.rent <= ?1")
+    List<Houses> searchQueryByRent(Float rent);
+
+    @Query("select h from Houses h where h.isOccupied = true")
+    List<Houses> findAllOccupiedHouses();
+
+    @Query("select h from Houses h where h.isOccupied = false")
     List<Houses> findTheVacantHouses();
 
-    @Query("SELECT * FROM Houses WHERE isOccupied=true" )
-    List<Houses> findTheOccupiedHouses();
-
-    @Query("SELECT * FROM Houses WHERE rent=?" )
-    List<Houses> searchQueryByRent(String rent);
 }
