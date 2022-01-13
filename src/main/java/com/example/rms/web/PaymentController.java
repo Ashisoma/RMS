@@ -58,6 +58,6 @@ public class PaymentController {
                             @RequestParam (required = false)String features,
                             @RequestParam (required = false)Float rent,
                             @RequestParam (required = false)boolean isOccupied){
-
+//        service.updateTenant(id,rent);
     }
 }
