@@ -56,7 +56,7 @@ public class TenantsService {
     @Transactional
     public void updateTenant(Long tenantId, String f_name, String l_name, Integer phone_number, String email, String password, LocalDate signUpDate, int emailConfirmed, String gender) {
         Tenants tenant = tenantsRepository.findById(tenantId).orElseThrow( () ->
-                new IllegalStateException("Student with id :" + tenantId + "does not exist"));
+                new IllegalStateException("Tenant with id :" + tenantId + "does not exist"));
         if (f_name != null && f_name.length()>0 && !Objects.equals(tenant.getF_name(),f_name))
         {
             tenant.setF_name(f_name);

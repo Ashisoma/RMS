@@ -6,11 +6,14 @@ import com.example.rms.domain.Tenants;
 import com.example.rms.repository.AdminRepository;
 import com.example.rms.repository.PaymentRepository;
 import com.example.rms.repository.TenantsRepository;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -63,4 +66,15 @@ public void addNewPayment(Payment payment) {
     paymentRepository.save(payment);
 }
 //    UPDATE A PAYMENT
+public void updateTenant(Long id, String tenantName, String houseNumber, LocalDateTime timestamp, Float amountPayed, String comment) {
+    Payment payment = paymentRepository.findById(id).orElseThrow(() ->
+            new IllegalStateException("Student with id :" + id + "does not exist"));
+    if (tenantName != null && tenantName.length() > 0 && !Objects.equals(payment.getTenantName(), tenantName)) {
+        payment.setTenantName(tenantName);
+    }
+    if (houseNumber != null && houseNumber.length() > 0 && !Objects.equals(payment.getHouseNumber(), houseNumber)) {
+        payment.setTenantName(houseNumber);
+    }
+//    TODO FINISH THE UPDATE FOR THE PAYMENT
+}
 }

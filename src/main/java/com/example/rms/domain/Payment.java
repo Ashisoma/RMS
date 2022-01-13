@@ -1,5 +1,8 @@
 package com.example.rms.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -31,6 +34,8 @@ public class Payment {
     @Column(unique = true, nullable = false)
     private String houseNumber;
 
+    @JsonSerialize
+    @JsonDeserialize
     @Column(unique = true, nullable = false)
     private LocalDateTime timestamp;
 

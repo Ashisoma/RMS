@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping(path = "api/v1/rms/payment")
 public class PaymentController {
 
     @Autowired
@@ -40,7 +40,7 @@ public class PaymentController {
     public List<Payment> paymentListByTenant(@PathVariable("tenantSId") Long tenantSId){
         return service.paymentListByTenant(tenantSId);
     }
-    @GetMapping(path = "/admin/{id]")
+    @GetMapping(path = "/admin/{id}")
     public List<Payment> findPaymentsRecByAdmin(@PathVariable("id")Long id){
         return service.findPaymentsRecByAdmin(id);
     }
@@ -53,10 +53,11 @@ public class PaymentController {
 
     //PUT
     @PutMapping(path = "/put/{id}")
-    public  void editAHouse(@PathVariable("id") Long id,
+    public  void editAPayment(@PathVariable("id") Long id,
                             @RequestParam (required = false)String houseNumber,
                             @RequestParam (required = false)String features,
                             @RequestParam (required = false)Float rent,
                             @RequestParam (required = false)boolean isOccupied){
+
     }
 }
