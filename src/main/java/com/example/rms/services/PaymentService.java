@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -48,8 +48,8 @@ public class PaymentService {
      */
 //    BY DATE
 
-    public List<Payment> findByTimestampAndHouses_HouseNumber(LocalDateTime timestamp, String houseNumber){
-        return paymentRepository.findByTimestampAndHouses_HouseNumber(timestamp,houseNumber);
+    public List<Payment> findByPaymentDateAndHouses_HouseNumberIgnoreCase(LocalDate paymentDate, String houseNumber){
+        return paymentRepository.findByPaymentDateAndHouses_HouseNumberIgnoreCase(paymentDate,houseNumber);
     }
 //    BY A TENANT
     public List<Payment> paymentListByTenant(Long tenantSId){
@@ -63,10 +63,14 @@ public class PaymentService {
     }
 //    DO A PAYMENT
 public void addNewPayment(Payment payment) {
-    paymentRepository.save(payment);
+       Optional <Payment> paymentById = paymentRepository.findById(payment.getId());
+    if(paymentById.isPresent()){
+        throw new IllegalStateException("Payment id already exists");
+    }
+        paymentRepository.save(payment);
 }
 //    UPDATE A PAYMENT
-public void updateTenant(Long id, String tenantName, String houseNumber, LocalDateTime timestamp, Float amountPayed, String comment) {
+public void updateTenant(Long id, String tenantName, String houseNumber, LocalDate paymentDate, Float amountPayed, String comment) {
     Payment payment = paymentRepository.findById(id).orElseThrow(() ->
             new IllegalStateException("Student with id :" + id + "does not exist"));
     if (tenantName != null && tenantName.length() > 0 && !Objects.equals(payment.getTenantName(), tenantName)) {

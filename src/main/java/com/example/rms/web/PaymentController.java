@@ -5,6 +5,7 @@ import com.example.rms.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -30,10 +31,10 @@ public class PaymentController {
         return service.findById(id);
     }
 
-    @GetMapping(path = "/payment/{timestamp}/houses/{houseNumber}")
-    public List<Payment> findByTimestampAndHouses_HouseNumber(@PathVariable("timestamp ") LocalDateTime timestamp,
+    @GetMapping(path = "/payment/{paymentDate}/houses/{houseNumber}")
+    public List<Payment> findByPaymentDateAndHouses_HouseNumberIgnoreCase(@PathVariable("paymentDate ") LocalDate paymentDate,
                                    @PathVariable("houseNumber ") String houseNumber){
-        return service.findByTimestampAndHouses_HouseNumber(timestamp,houseNumber);
+        return service.findByPaymentDateAndHouses_HouseNumberIgnoreCase(paymentDate,houseNumber);
     }
 
     @GetMapping(path = "/tenant/{tenantSId}")
