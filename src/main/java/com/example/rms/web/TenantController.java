@@ -23,9 +23,9 @@ public class TenantController {
         return service.getAll();
     }
 
-    @GetMapping(path = "/getById{id}")
-    public Optional<Tenants> getTenantById(Long id){
-        return  service.getTenantById(id);
+    @GetMapping(path = "/getById/{id}")
+    public Optional<Tenants> getTenantById(@PathVariable("id") Long id){
+        return  service.findTenantById(id);
     }
 
     @PostMapping(path = "/registerTenant")
@@ -41,15 +41,14 @@ public class TenantController {
     @PutMapping(path = "/updateTenant/{id}")
     public void updateTenant(
             @PathVariable("id") Long id,
-            @RequestParam String f_name,
-            @RequestParam String l_name,
-            @RequestParam  Integer phone_number,
-            @RequestParam String email,
-            @RequestParam String password,
-            @RequestParam LocalDate signUpDate,
-            @RequestParam int emailConfirmed,
-            @RequestParam String gender){
-        service.updateTenant(id,f_name,l_name,phone_number,email,password,signUpDate,emailConfirmed,gender);
+            @RequestParam(required = false) String f_name,
+            @RequestParam(required = false) String l_name,
+            @RequestParam(required = false)  Integer phone_number,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String password,
+            @RequestParam(required = false) LocalDate signUpDate,
+            @RequestParam(required = false) String gender){
+        service.updateTenant(id,f_name,l_name,phone_number,email,password,signUpDate,gender);
     }
 
 }

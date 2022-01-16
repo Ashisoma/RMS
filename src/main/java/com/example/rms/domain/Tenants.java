@@ -149,5 +149,9 @@ public class    Tenants {
         this.gender = gender;
     }
 
+    public void setHouses(Houses houses) {
+        this.houses = houses;
+    }
+
     //    String
 }

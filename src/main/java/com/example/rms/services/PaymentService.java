@@ -1,16 +1,17 @@
 package com.example.rms.services;
 
 import com.example.rms.domain.Admin;
+import com.example.rms.domain.Houses;
 import com.example.rms.domain.Payment;
 import com.example.rms.domain.Tenants;
 import com.example.rms.repository.AdminRepository;
+import com.example.rms.repository.HousesRepository;
 import com.example.rms.repository.PaymentRepository;
 import com.example.rms.repository.TenantsRepository;
-import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -23,12 +24,16 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     @Autowired
     private final TenantsRepository tenantsRepository;
+    @Autowired
     private final AdminRepository adminRepository;
+    @Autowired
+    private final HousesRepository housesRepository;
 
-    public PaymentService(PaymentRepository paymentRepository, TenantsRepository tenantsRepository, AdminRepository adminRepository) {
+    public PaymentService(PaymentRepository paymentRepository, TenantsRepository tenantsRepository, AdminRepository adminRepository, HousesRepository housesRepository) {
         this.paymentRepository = paymentRepository;
         this.tenantsRepository = tenantsRepository;
         this.adminRepository = adminRepository;
+        this.housesRepository = housesRepository;
     }
 
     //GET
@@ -68,6 +73,7 @@ public void addNewPayment(Payment payment) {
         throw new IllegalStateException("Payment id already exists");
     }
         paymentRepository.save(payment);
+//    return payment;
 }
 //    UPDATE A PAYMENT
 public void updateTenant(Long id, String tenantName, String houseNumber, LocalDate paymentDate, Float amountPayed, String comment) {
@@ -81,4 +87,16 @@ public void updateTenant(Long id, String tenantName, String houseNumber, LocalDa
     }
 //    TODO FINISH THE UPDATE FOR THE PAYMENT
 }
+    @Transactional
+    public void assignPaymentToHouse(Long houseId, Long paymentId){
+        Houses house = housesRepository.findById(houseId).get();
+        Payment payment = paymentRepository.findById(paymentId).get();
+        boolean paymentExists = paymentRepository.existsById(paymentId);
+        boolean houseExists = housesRepository.existsById(houseId);
+        if (!paymentExists && !houseExists){
+            throw  new IllegalStateException("Payment with id :"+ paymentId +" and house id:"+ houseId +" cant be enrolled. Error enrolling admin");
+        }else {
+            payment.addPayment(house);
+        }
+    }
 }

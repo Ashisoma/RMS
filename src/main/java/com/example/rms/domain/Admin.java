@@ -1,5 +1,7 @@
 package com.example.rms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,12 +43,14 @@ public class Admin {
     @Column(name = "gender", nullable = false, length = 10)
     private String gender;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "ownedBy",
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
     )
     private List<Houses> housesList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "admin",
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE}

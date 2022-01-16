@@ -1,5 +1,7 @@
 package com.example.rms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,6 +11,9 @@ import java.util.List;
 @Entity
 public class Houses {
 
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     @Id
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
@@ -43,6 +48,7 @@ public class Houses {
     )
     private Tenants tenant;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "houses",
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
@@ -143,4 +149,13 @@ public class Houses {
         return ownedBy;
     }
 
+    // this one should work just fine, many to one
+    public void enrollAdmin(Admin admin) {
+        this.ownedBy = admin;
+    }
+
+    // this is one to one so not yet tried out
+    public void addTenant(Tenants tenant) {
+        this.tenant = tenant;
+    }
 }

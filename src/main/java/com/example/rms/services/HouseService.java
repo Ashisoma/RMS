@@ -1,9 +1,14 @@
 package com.example.rms.services;
 
+import com.example.rms.domain.Admin;
 import com.example.rms.domain.Houses;
+import com.example.rms.domain.Tenants;
+import com.example.rms.repository.AdminRepository;
 import com.example.rms.repository.HousesRepository;
+import com.example.rms.repository.TenantsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,9 +19,13 @@ public class HouseService {
 
     @Autowired
     private final HousesRepository housesRepository;
+    private final AdminRepository adminRepository;
+    private final TenantsRepository tenantsRepository;
 
-    public HouseService(HousesRepository housesRepository) {
+    public HouseService(HousesRepository housesRepository, AdminRepository adminRepository, TenantsRepository tenantsRepository) {
         this.housesRepository = housesRepository;
+        this.adminRepository = adminRepository;
+        this.tenantsRepository = tenantsRepository;
     }
 
     // GET FUNCTIONS
@@ -43,8 +52,8 @@ public class HouseService {
         }
       //POST FUNCTIONS
       // ADD A HOUSE
-    public  void  addAHouse(Houses houses){
-        housesRepository.save(houses);
+    public Houses addAHouse(Houses houses){
+        return housesRepository.save(houses);
     }
 
       // UPDATE A HOUSE
@@ -66,4 +75,31 @@ public class HouseService {
               house.setOccupied(isOccupied);
           }
       }
+
+
+    @Transactional
+    public void assignHouseToAdmin(Long aminId, Long houseId){
+        Houses house = housesRepository.findById(houseId).get();
+        Admin admin = adminRepository.findById(aminId).get();
+        boolean adminExists = adminRepository.existsById(aminId);
+        boolean houseExists = housesRepository.existsById(houseId);
+        if (!adminExists && !houseExists){
+            throw  new IllegalStateException("Admin with id :"+ aminId +" and house id:"+ houseId +" cant be enrolled. Error enrolling admin");
+        }else {
+            house.enrollAdmin(admin);
+        }
+    }
+
+    @Transactional
+    public void assignHouseToTenant(Long tenantId, Long houseId){
+        Houses house = housesRepository.findById(houseId).get();
+        Tenants tenant = tenantsRepository.findById(tenantId).get();
+        boolean tenantExists = tenantsRepository.existsById(tenantId);
+        boolean houseExists = housesRepository.existsById(houseId);
+        if (!tenantExists && !houseExists){
+            throw  new IllegalStateException("Tenant with id :"+ tenantId +" and house id:"+ houseId +" cant be enrolled. Error enrolling admin");
+        }else {
+            house.addTenant(tenant);
+        }
+    }
 }

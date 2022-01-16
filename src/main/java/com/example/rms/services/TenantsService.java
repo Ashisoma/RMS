@@ -1,6 +1,7 @@
 package com.example.rms.services;
 
 import com.example.rms.domain.Admin;
+import com.example.rms.domain.Houses;
 import com.example.rms.domain.Tenants;
 import com.example.rms.repository.TenantsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +27,9 @@ public class TenantsService {
         return tenantsRepository.findAll();
     }
 
-    public Optional <Tenants> getTenantById(Long id) {
-        boolean exists = tenantsRepository.existsById(id);
-        if (!exists){
-            throw new IllegalStateException("Student id: " + id + "does not exist!");
-        }else {
-            return  tenantsRepository.findById(id);
-        }
+    public Optional<Tenants> findTenantById(Long id){
+        return tenantsRepository.findById(id);
     }
-    
     public void addNewTenant(Tenants tenants){
          Optional <Tenants>tenant = tenantsRepository.findById(tenants.getId());
         if (tenant.isPresent()){
@@ -54,7 +49,7 @@ public class TenantsService {
     }
 
     @Transactional
-    public void updateTenant(Long tenantId, String f_name, String l_name, Integer phone_number, String email, String password, LocalDate signUpDate, int emailConfirmed, String gender) {
+    public void updateTenant(Long tenantId, String f_name, String l_name, Integer phone_number, String email, String password, LocalDate signUpDate,  String gender) {
         Tenants tenant = tenantsRepository.findById(tenantId).orElseThrow( () ->
                 new IllegalStateException("Tenant with id :" + tenantId + "does not exist"));
         if (f_name != null && f_name.length()>0 && !Objects.equals(tenant.getF_name(),f_name))
@@ -80,7 +75,6 @@ public class TenantsService {
         if(gender != null && gender.length()>0 && !Objects.equals(tenant.getGender(),gender)) {
             tenant.setGender(gender);
         }
-
 
 
     }

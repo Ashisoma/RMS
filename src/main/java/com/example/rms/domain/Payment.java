@@ -57,7 +57,7 @@ public class Payment {
     @JoinColumn(name = "admin_id",
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
-                    name = "houses_payment_fk"
+                    name = "admin_payment_fk"
             )
     )
     private  Admin admin;
@@ -159,4 +159,8 @@ public class Payment {
     public void setComment(String comment) {
         this.comment = comment;
     }
-}
+
+
+    public void addPayment(Houses houses) {
+        this.houses = houses;
+    }}

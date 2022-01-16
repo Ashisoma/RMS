@@ -59,4 +59,23 @@ public class HouseController {
                             @RequestParam (required = false)boolean isOccupied){
         service.updateHouse(id,houseNumber,features,rent,isOccupied);
     }
+
+    // RELATIONSHIPS
+    @PutMapping(path = "/enrollAdmin/{adminId}/houses/{houseId}")
+    public Houses addAdminToHouse(@PathVariable("adminId")Long adminId,
+                                                        @PathVariable("houseId")Long houseId){
+        Houses house = service.findHouseById(houseId).get();
+        service.assignHouseToAdmin(adminId,houseId);
+        return service.addAHouse(house);
+
+    }
+
+    @PutMapping(path = "/enrollTenant/{tenantId}/houses/{houseId}")
+    public Houses addTenantToHouse(@PathVariable("tenantId")Long tenantId,
+                                  @PathVariable("houseId")Long houseId){
+        Houses house = service.findHouseById(houseId).get();
+        service.assignHouseToTenant(tenantId,houseId);
+        return service.addAHouse(house);
+
+    }
 }

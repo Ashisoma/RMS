@@ -1,8 +1,12 @@
 package com.example.rms.web;
 
+import com.example.rms.domain.Houses;
 import com.example.rms.domain.Payment;
+import com.example.rms.domain.Tenants;
+import com.example.rms.repository.PaymentRepository;
 import com.example.rms.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -16,6 +20,9 @@ public class PaymentController {
 
     @Autowired
     private final PaymentService service;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
 
     public PaymentController(PaymentService service) {
         this.service = service;
@@ -60,5 +67,15 @@ public class PaymentController {
                             @RequestParam (required = false)Float rent,
                             @RequestParam (required = false)boolean isOccupied){
 //        service.updateTenant(id,rent);
+    }
+
+
+        @PutMapping(path = "/makePayment/{houseId}/payment/{paymentId}")
+    public Payment addPaymentToHouse(@PathVariable("houseId")Long houseId,
+                                   @PathVariable("paymentId")Long paymentId){
+        Payment payment = service.findById(paymentId).get();
+        service.assignPaymentToHouse(houseId,paymentId);
+        return paymentRepository.save(payment);
+
     }
 }
