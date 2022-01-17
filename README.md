@@ -1,4 +1,4 @@
-# RMS
+# Rental Management System
 
 
 ## Author
