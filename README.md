@@ -8,9 +8,6 @@
 ## Description
 This spring boot application with Postgresql database. It is a rental management backend api with endpoint to varous functions for different entities that handle queries for the api.
 
-## Application set-up
-<!-- to be added -->
-
 ## Techologies Used
 - Java
 - Spring Boot
@@ -18,6 +15,14 @@ This spring boot application with Postgresql database. It is a rental management
 - Maven
 - Intellij Idea
 
+## Application set-up 🏗️
+<!-- to be added -->
+- Git clone the repository
+- Open in Intellij Idea or preffered text editor
+- Maven build the pom file
+- Create database in postrgresql console 
+- Set up your database name and the password in application.properties file in resouce foder
+- Youre all set up 👍
 
 ## Contribution
 - You can fork the repo and add your extra feature to the web app. Click on the following link to fork:
