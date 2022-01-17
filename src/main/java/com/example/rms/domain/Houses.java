@@ -1,14 +1,19 @@
 package com.example.rms.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Table
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+@Table(name = "houses")
 @Entity
 public class Houses {
 
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     @Id
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
@@ -24,6 +29,31 @@ public class Houses {
 
     @Column(name = "is_occupied",nullable = false)
     private boolean isOccupied;
+
+
+    // RELATIONSHIP
+    @ManyToOne
+    @JoinColumn(name = "owned_by_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "admin_house_fk"
+            )
+    )
+    private Admin ownedBy;
+
+    // TODO: 25/10/2021 finish this editing
+    @OneToOne
+    @JoinColumn(name = "tenant_id",
+            referencedColumnName = "id"
+    )
+    private Tenants tenant;
+
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "houses",
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
+    )
+    private List<Payment> paymentsMade = new ArrayList<>();
 
     public Houses() {
     }
@@ -52,6 +82,23 @@ public class Houses {
                 ", rent=" + rent +
                 ", isOccupied=" + isOccupied +
                 '}';
+    }
+
+
+    public void setOwnedBy(Admin ownedBy) {
+        this.ownedBy = ownedBy;
+    }
+
+    public void setTenant(Tenants tenant) {
+        this.tenant = tenant;
+    }
+
+    public List<Payment> getPaymentsMade() {
+        return paymentsMade;
+    }
+
+    public void setPaymentsMade(List<Payment> paymentsMade) {
+        this.paymentsMade = paymentsMade;
     }
 
     public Long getId() {
@@ -92,5 +139,23 @@ public class Houses {
 
     public void setOccupied(boolean occupied) {
         isOccupied = occupied;
+    }
+
+    public Tenants getTenant() {
+        return tenant;
+    }
+
+    public Admin getOwnedBy() {
+        return ownedBy;
+    }
+
+    // this one should work just fine, many to one
+    public void enrollAdmin(Admin admin) {
+        this.ownedBy = admin;
+    }
+
+    // this is one to one so not yet tried out
+    public void addTenant(Tenants tenant) {
+        this.tenant = tenant;
     }
 }

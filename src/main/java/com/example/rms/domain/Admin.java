@@ -1,7 +1,11 @@
 package com.example.rms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "admin")
 @Entity
@@ -22,7 +26,7 @@ public class Admin {
     private String s_name;
 
     @Column(name = "national_id", unique = true, nullable = false, length = 8)
-    private Integer national_id;
+    private Integer nationalId;
 
     @Column(name = "email", unique = true, nullable = false, length = 20)
     private String email;
@@ -39,28 +43,42 @@ public class Admin {
     @Column(name = "gender", nullable = false, length = 10)
     private String gender;
 
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "ownedBy",
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
+    )
+    private List<Houses> housesList = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "admin",
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
+    )
+    private List<Payment> paymentList = new ArrayList<>();
+
     public Admin() {
     }
 
-    public Admin(Long id, String f_name, String s_name, Integer national_id, String email, String password, LocalDate sign_up_date, boolean emailConfirmed, String gender) {
+    public Admin(Long id, String f_name, String s_name, Integer nationalId, String email, String password, LocalDate signUpDate, boolean emailConfirmed, String gender) {
         this.id = id;
         this.f_name = f_name;
         this.s_name = s_name;
-        this.national_id = national_id;
+        this.nationalId = nationalId;
         this.email = email;
         this.password = password;
-        this.signUpDate = sign_up_date;
+        this.signUpDate = signUpDate;
         this.emailConfirmed = emailConfirmed;
         this.gender = gender;
     }
 
-    public Admin(String f_name, String s_name, Integer national_id, String email, String password, LocalDate sign_up_date, boolean emailConfirmed, String gender) {
+    public Admin(String f_name, String s_name, Integer nationalId, String email, String password, LocalDate signUpDate, boolean emailConfirmed, String gender) {
         this.f_name = f_name;
         this.s_name = s_name;
-        this.national_id = national_id;
+        this.nationalId = nationalId;
         this.email = email;
         this.password = password;
-        this.signUpDate = sign_up_date;
+        this.signUpDate = signUpDate;
         this.emailConfirmed = emailConfirmed;
         this.gender = gender;
     }
@@ -71,13 +89,33 @@ public class Admin {
                 "id=" + id +
                 ", f_name='" + f_name + '\'' +
                 ", s_name='" + s_name + '\'' +
-                ", national_id=" + national_id +
+                ", national_id=" + nationalId +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", sign_up_date=" + signUpDate +
                 ", emailConfirmed=" + emailConfirmed +
                 ", gender='" + gender + '\'' +
                 '}';
+    }
+
+    public boolean isEmailConfirmed() {
+        return emailConfirmed;
+    }
+
+    public List<Houses> getHousesList() {
+        return housesList;
+    }
+
+    public void setHousesList(List<Houses> housesList) {
+        this.housesList = housesList;
+    }
+
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
     }
 
     public String getF_name() {
@@ -96,12 +134,12 @@ public class Admin {
         this.s_name = s_name;
     }
 
-    public Integer getNational_id() {
-        return national_id;
+    public Integer getNationalId() {
+        return nationalId;
     }
 
-    public void setNational_id(Integer national_id) {
-        this.national_id = national_id;
+    public void setNationalId(Integer nationalId) {
+        this.nationalId = nationalId;
     }
 
     public String getEmail() {

@@ -1,20 +1,26 @@
 package com.example.rms.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
 public class Payment {
 
-    @SequenceGenerator(
-            name = "payment_sequence",
-            sequenceName = "payment_sequence",
-            allocationSize = 1
-    )
+    // todo : here there is also need for inheritance and many to many implementation
+
+//    @SequenceGenerator(
+//            name = "payment_sequence",
+//            sequenceName = "payment_sequence",
+//            allocationSize = 1
+//    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "payment_sequence"
+            strategy = GenerationType.AUTO
+//            generator = "payment_sequence"
     )
 
 
@@ -23,36 +29,55 @@ public class Payment {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private Long tenantId;
+    private String tenantName;
 
     @Column(unique = true, nullable = false)
     private String houseNumber;
 
     @Column(unique = true, nullable = false)
-    private Timestamp timestamp;
+    private LocalDate paymentDate;
 
     @Column(unique = true, nullable = false)
     private Float amountPayed;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String comment;
+
+    // RELATIONSHIP
+    @ManyToOne
+    @JoinColumn(name = "houses_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "houses_payment_fk"
+            )
+    )
+    private Houses houses;
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "admin_payment_fk"
+            )
+    )
+    private  Admin admin;
 
     public Payment() {
     }
 
-    public Payment(Long id, Long tenantId, String houseNumber, Timestamp timestamp, Float amountPayed, String comment) {
+    public Payment(Long id, String tenantName, String houseNumber, LocalDate paymentDate, Float amountPayed, String comment) {
         this.id = id;
-        this.tenantId = tenantId;
+        this.tenantName = tenantName;
         this.houseNumber = houseNumber;
-        this.timestamp = timestamp;
+        this.paymentDate = paymentDate;
         this.amountPayed = amountPayed;
         this.comment = comment;
     }
 
-    public Payment(Long tenantId, String houseNumber, Timestamp timestamp, Float amountPayed, String comment) {
-        this.tenantId = tenantId;
+    public Payment(String tenantName, String houseNumber, LocalDate paymentDate, Float amountPayed, String comment) {
+        this.tenantName = tenantName;
         this.houseNumber = houseNumber;
-        this.timestamp = timestamp;
+        this.paymentDate = paymentDate;
         this.amountPayed = amountPayed;
         this.comment = comment;
     }
@@ -61,12 +86,28 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "id=" + id +
-                ", tenantId=" + tenantId +
+                ", tenantName=" + tenantName +
                 ", houseNumber='" + houseNumber + '\'' +
-                ", timestamp=" + timestamp +
+                ", paymentDate=" + paymentDate +
                 ", amountPayed=" + amountPayed +
                 ", comment='" + comment + '\'' +
                 '}';
+    }
+
+    public Houses getHouses() {
+        return houses;
+    }
+
+    public void setHouses(Houses houses) {
+        this.houses = houses;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 
     public Long getId() {
@@ -77,29 +118,31 @@ public class Payment {
         this.id = id;
     }
 
-    public Long getTenantId() {
-        return tenantId;
+    public String getTenantName() {
+        return tenantName;
     }
 
-    public void setTenantId(Long tenantId) {
-        this.tenantId = tenantId;
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
     }
 
     public String getHouseNumber() {
         return houseNumber;
     }
 
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
 
     public Float getAmountPayed() {
         return amountPayed;
@@ -116,4 +159,8 @@ public class Payment {
     public void setComment(String comment) {
         this.comment = comment;
     }
-}
+
+
+    public void addPayment(Houses houses) {
+        this.houses = houses;
+    }}
