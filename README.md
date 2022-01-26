@@ -15,6 +15,8 @@ This spring boot application with Postgresql database. It is a rental management
 - Maven
 - Intellij Idea
 
+## Dependencies used
+
 ## Application set-up 🏗️
 <!-- to be added -->
 - Git clone the repository
