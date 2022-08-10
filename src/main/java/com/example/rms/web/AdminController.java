@@ -36,7 +36,7 @@ public class AdminController {
     }
 
     //POST
-    @PostMapping(path = "/registerAdmin")
+    @PostMapping(path = "/add")
     public void registerNewAdmin(@RequestBody Admin admin){
         adminService.addNewAdmin(admin);
     }

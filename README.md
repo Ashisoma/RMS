@@ -16,6 +16,9 @@ This spring boot application with Postgresql database. It is a rental management
 - Intellij Idea
 
 ## Dependencies used
+- Swagger UI
+- Spring boot JPA
+- Postgres driver
 
 ## Application set-up 🏗️
 <!-- to be added -->
@@ -24,7 +27,23 @@ This spring boot application with Postgresql database. It is a rental management
 - Maven build the pom file
 - Create database in postrgresql console 
 - Set up your database name and the password in application.properties file in resouce foder
-- Youre all set up 👍
+- You're all set up 👍
+
+## End Points
+  /api/v1/rms/
+
+ ### Admin
+Get all
+-    /admin/
+Add admin
+-   /admin/add
+    Update
+    
+
+
+ ### House
+ ### Tenant
+ ### Payment
 
 ## Contribution
 - You can fork the repo and add your extra feature to the web app. Click on the following link to fork:
