@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/v1/admin")
+@RequestMapping(path = "api/v1/rms/admin")
 public class AdminController {
 
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "admin")
 @Entity
 public class Admin {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+    @GeneratedValue(strategy = GenerationType.AUTO,
             generator = "admin_sequence")
     @SequenceGenerator(name = "admin_sequence",
             sequenceName = "admin_sequence",

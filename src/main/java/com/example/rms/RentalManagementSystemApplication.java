@@ -6,8 +6,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.sql.Timestamp;
 
-@SpringBootApplication
 @EnableSwagger2
+@SpringBootApplication
 public class RentalManagementSystemApplication {
 
 	public static void main(String[] args) {

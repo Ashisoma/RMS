@@ -1,16 +1,12 @@
 package com.example.rms.web;
 
-import com.example.rms.domain.Houses;
 import com.example.rms.domain.Payment;
-import com.example.rms.domain.Tenants;
 import com.example.rms.repository.PaymentRepository;
 import com.example.rms.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,14 +59,14 @@ public class PaymentController {
     @PutMapping(path = "/put/{id}")
     public  void editAPayment(@PathVariable("id") Long id,
                             @RequestParam (required = false)String houseNumber,
-                            @RequestParam (required = false)String features,
-                            @RequestParam (required = false)Float rent,
-                            @RequestParam (required = false)boolean isOccupied){
-//        service.updateTenant(id,rent);
+                            @RequestParam (required = false)String tenantName,
+                            @RequestParam (required = false)Float amountPayed,
+                            @RequestParam(required = false)String comment){
+        service.updateTenant(id,tenantName,houseNumber,amountPayed,comment);
     }
 
 
-        @PutMapping(path = "/makePayment/{houseId}/payment/{paymentId}")
+    @PutMapping(path = "/makePayment/{houseId}/payment/{paymentId}")
     public Payment addPaymentToHouse(@PathVariable("houseId")Long houseId,
                                    @PathVariable("paymentId")Long paymentId){
         Payment payment = service.findById(paymentId).get();
