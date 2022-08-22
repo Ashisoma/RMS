@@ -67,7 +67,7 @@ public class PaymentService {
         return paymentRepository.findByHouses_OwnedBy_Id(adminId);
     }
 //    DO A PAYMENT
-public void addNewPayment(Payment payment) {
+    public void addNewPayment(Payment payment) {
        Optional <Payment> paymentById = paymentRepository.findById(payment.getId());
     if(paymentById.isPresent()){
         throw new IllegalStateException("Payment id already exists");
@@ -76,7 +76,7 @@ public void addNewPayment(Payment payment) {
 //    return payment;
 }
 //    UPDATE A PAYMENT
-public void updateTenant(Long id, String tenantName, String houseNumber, LocalDate paymentDate, Float amountPayed, String comment) {
+public void updateTenant(Long id, String tenantName, String houseNumber, Float amountPayed, String comment) {
     Payment payment = paymentRepository.findById(id).orElseThrow(() ->
             new IllegalStateException("Student with id :" + id + "does not exist"));
     if (tenantName != null && tenantName.length() > 0 && !Objects.equals(payment.getTenantName(), tenantName)) {
@@ -84,6 +84,12 @@ public void updateTenant(Long id, String tenantName, String houseNumber, LocalDa
     }
     if (houseNumber != null && houseNumber.length() > 0 && !Objects.equals(payment.getHouseNumber(), houseNumber)) {
         payment.setTenantName(houseNumber);
+    }
+    if (amountPayed !=null && !Objects.equals(payment.getAmountPayed(), amountPayed)) {
+        payment.setAmountPayed(amountPayed);
+    }
+    if (comment != null && comment.length() > 0 && !Objects.equals(payment.getComment(), comment)) {
+        payment.setComment(comment);
     }
 //    TODO FINISH THE UPDATE FOR THE PAYMENT
 }

@@ -40,14 +40,16 @@ public class AdminService {
         adminByNatId = adminRepository.findByNationalId(admin.getNationalId());
         adminByEmail = adminRepository.findByEmail(admin.getEmail());
 
-        if(adminByNatId.isPresent()){
-            throw new IllegalStateException("National id already exists");
-        }
-
+//        if(adminByNatId.isPresent()){
+//            throw new IllegalStateException("National id already exists");
+//
+//        }
         if(adminByEmail.isPresent()){
             throw new IllegalStateException("Email already exists");
         }
-        adminRepository.save(admin);
+        else {
+            adminRepository.save(admin);
+        }
 
     }
     // UPDATE

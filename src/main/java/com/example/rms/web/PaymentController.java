@@ -59,14 +59,14 @@ public class PaymentController {
     @PutMapping(path = "/put/{id}")
     public  void editAPayment(@PathVariable("id") Long id,
                             @RequestParam (required = false)String houseNumber,
-                            @RequestParam (required = false)String features,
-                            @RequestParam (required = false)Float rent,
-                            @RequestParam (required = false)boolean isOccupied){
-//        service.updateTenant(id,rent);
+                            @RequestParam (required = false)String tenantName,
+                            @RequestParam (required = false)Float amountPayed,
+                            @RequestParam(required = false)String comment){
+        service.updateTenant(id,tenantName,houseNumber,amountPayed,comment);
     }
 
 
-        @PutMapping(path = "/makePayment/{houseId}/payment/{paymentId}")
+    @PutMapping(path = "/makePayment/{houseId}/payment/{paymentId}")
     public Payment addPaymentToHouse(@PathVariable("houseId")Long houseId,
                                    @PathVariable("paymentId")Long paymentId){
         Payment payment = service.findById(paymentId).get();

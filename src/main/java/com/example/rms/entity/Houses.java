@@ -1,6 +1,9 @@
 package com.example.rms.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +11,9 @@ import java.util.List;
 
 @Table(name = "houses")
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Houses {
 
     @GeneratedValue(
@@ -54,99 +60,7 @@ public class Houses {
     )
     private List<Payment> paymentsMade = new ArrayList<>();
 
-    public Houses() {
-    }
-
-    public Houses(Long id, String houseNumber, String features, Float rent, boolean isOccupied) {
-        this.id = id;
-        this.houseNumber = houseNumber;
-        this.features = features;
-        this.rent = rent;
-        this.isOccupied = isOccupied;
-    }
-
-    public Houses(String houseNumber, String features, Float rent, boolean isOccupied) {
-        this.houseNumber = houseNumber;
-        this.features = features;
-        this.rent = rent;
-        this.isOccupied = isOccupied;
-    }
-
-    @Override
-    public String toString() {
-        return "Houses{" +
-                "id=" + id +
-                ", houseNumber='" + houseNumber + '\'' +
-                ", features='" + features + '\'' +
-                ", rent=" + rent +
-                ", isOccupied=" + isOccupied +
-                '}';
-    }
-
-
-    public void setOwnedBy(Admin ownedBy) {
-        this.ownedBy = ownedBy;
-    }
-
-    public void setTenant(Tenants tenant) {
-        this.tenant = tenant;
-    }
-
-    public List<Payment> getPaymentsMade() {
-        return paymentsMade;
-    }
-
-    public void setPaymentsMade(List<Payment> paymentsMade) {
-        this.paymentsMade = paymentsMade;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public String getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(String features) {
-        this.features = features;
-    }
-
-    public Float getRent() {
-        return rent;
-    }
-
-    public void setRent(Float rent) {
-        this.rent = rent;
-    }
-
-    public boolean isOccupied() {
-        return isOccupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        isOccupied = occupied;
-    }
-
-    public Tenants getTenant() {
-        return tenant;
-    }
-
-    public Admin getOwnedBy() {
-        return ownedBy;
-    }
+    // END OF RELATIONSHIPS
 
     // this one should work just fine, many to one
     public void enrollAdmin(Admin admin) {

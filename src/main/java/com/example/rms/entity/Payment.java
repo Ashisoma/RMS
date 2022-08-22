@@ -1,24 +1,27 @@
 package com.example.rms.entity;
 
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table
+@Getter
+@Setter
+@ToString
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class Payment {
 
-    // todo : here there is also need for inheritance and many to many implementation
+    // here there is also need for inheritance and many to many implementation
 
-//    @SequenceGenerator(
-//            name = "payment_sequence",
-//            sequenceName = "payment_sequence",
-//            allocationSize = 1
-//    )
     @GeneratedValue(
             strategy = GenerationType.AUTO
-//            generator = "payment_sequence"
     )
-
 
     @Id
     @Column(unique = true, nullable = false)
@@ -56,107 +59,23 @@ public class Payment {
                     name = "admin_payment_fk"
             )
     )
-    private  Admin admin;
+    private Admin admin;
 
-    public Payment() {
-    }
-
-    public Payment(Long id, String tenantName, String houseNumber, LocalDate paymentDate, Float amountPayed, String comment) {
-        this.id = id;
-        this.tenantName = tenantName;
-        this.houseNumber = houseNumber;
-        this.paymentDate = paymentDate;
-        this.amountPayed = amountPayed;
-        this.comment = comment;
-    }
-
-    public Payment(String tenantName, String houseNumber, LocalDate paymentDate, Float amountPayed, String comment) {
-        this.tenantName = tenantName;
-        this.houseNumber = houseNumber;
-        this.paymentDate = paymentDate;
-        this.amountPayed = amountPayed;
-        this.comment = comment;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Payment payment = (Payment) o;
+        return id != null && Objects.equals(id, payment.id);
     }
 
     @Override
-    public String toString() {
-        return "Payment{" +
-                "id=" + id +
-                ", tenantName=" + tenantName +
-                ", houseNumber='" + houseNumber + '\'' +
-                ", paymentDate=" + paymentDate +
-                ", amountPayed=" + amountPayed +
-                ", comment='" + comment + '\'' +
-                '}';
-    }
-
-    public Houses getHouses() {
-        return houses;
-    }
-
-    public void setHouses(Houses houses) {
-        this.houses = houses;
-    }
-
-    public Admin getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTenantName() {
-        return tenantName;
-    }
-
-    public void setTenantName(String tenantName) {
-        this.tenantName = tenantName;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public LocalDate getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-
-
-    public Float getAmountPayed() {
-        return amountPayed;
-    }
-
-    public void setAmountPayed(Float amountPayed) {
-        this.amountPayed = amountPayed;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
+    public int hashCode() {
+        return getClass().hashCode();
     }
 
 
     public void addPayment(Houses houses) {
         this.houses = houses;
-    }}
+    }
+}
