@@ -1,6 +1,6 @@
 package com.example.rms.web;
 
-import com.example.rms.domain.Admin;
+import com.example.rms.entity.Admin;
 import com.example.rms.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package com.example.rms.repository;
 
-import com.example.rms.domain.Admin;
+import com.example.rms.entity.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,7 +1,6 @@
-package com.example.rms.domain;
+package com.example.rms.entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
