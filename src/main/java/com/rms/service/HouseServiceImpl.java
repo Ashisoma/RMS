@@ -1,6 +1,6 @@
 package com.rms.service;
 
-import com.rms.domain.House;
+import com.rms.entity.House;
 import com.rms.repository.HouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

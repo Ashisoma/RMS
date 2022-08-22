@@ -1,7 +1,7 @@
 package com.rms.web;
 
 
-import com.rms.domain.House;
+import com.rms.entity.House;
 import com.rms.service.HouseService;
 import com.rms.service.HouseServiceImpl;
 import org.springframework.data.domain.Page;

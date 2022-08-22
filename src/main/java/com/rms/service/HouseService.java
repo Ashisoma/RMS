@@ -1,7 +1,7 @@
 package com.rms.service;
 
 import javax.validation.Valid;
-import com.rms.domain.House;
+import com.rms.entity.House;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

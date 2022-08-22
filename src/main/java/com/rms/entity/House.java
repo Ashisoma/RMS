@@ -1,4 +1,4 @@
-package com.rms.domain;
+package com.rms.entity;
 
 
 import javax.persistence.Entity;
