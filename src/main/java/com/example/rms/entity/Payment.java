@@ -12,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class Payment {
@@ -72,5 +72,10 @@ public class Payment {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+
+    public void addPayment(Houses houses) {
+        this.houses = houses;
     }
 }

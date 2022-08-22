@@ -1,18 +1,20 @@
 package com.example.rms.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "admin")
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Admin {
@@ -54,6 +56,7 @@ public class Admin {
             mappedBy = "ownedBy",
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
     )
+    @ToString.Exclude
     private List<Houses> housesList = new ArrayList<>();
 
     @JsonIgnore
@@ -61,5 +64,19 @@ public class Admin {
             mappedBy = "admin",
             cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
     )
+    @ToString.Exclude
     private List<Payment> paymentList = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Admin admin = (Admin) o;
+        return id != null && Objects.equals(id, admin.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
