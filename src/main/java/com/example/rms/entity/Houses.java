@@ -1,9 +1,8 @@
-package com.example.rms.domain;
+package com.example.rms.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

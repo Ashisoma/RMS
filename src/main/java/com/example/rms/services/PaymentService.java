@@ -1,9 +1,9 @@
 package com.example.rms.services;
 
-import com.example.rms.domain.Admin;
-import com.example.rms.domain.Houses;
-import com.example.rms.domain.Payment;
-import com.example.rms.domain.Tenants;
+import com.example.rms.entity.Admin;
+import com.example.rms.entity.Houses;
+import com.example.rms.entity.Payment;
+import com.example.rms.entity.Tenants;
 import com.example.rms.repository.AdminRepository;
 import com.example.rms.repository.HousesRepository;
 import com.example.rms.repository.PaymentRepository;

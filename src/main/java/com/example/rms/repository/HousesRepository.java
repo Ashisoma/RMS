@@ -1,12 +1,10 @@
 package com.example.rms.repository;
 
-import com.example.rms.domain.Admin;
-import com.example.rms.domain.Houses;
+import com.example.rms.entity.Houses;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface HousesRepository extends JpaRepository<Houses, Long> {
 

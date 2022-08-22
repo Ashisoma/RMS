@@ -1,13 +1,12 @@
 package com.example.rms.repository;
 
-import com.example.rms.domain.Admin;
-import com.example.rms.domain.Payment;
-import com.example.rms.domain.Tenants;
+import com.example.rms.entity.Admin;
+import com.example.rms.entity.Payment;
+import com.example.rms.entity.Tenants;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
