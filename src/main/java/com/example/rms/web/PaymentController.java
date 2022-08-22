@@ -1,6 +1,6 @@
 package com.example.rms.web;
 
-import com.example.rms.domain.Payment;
+import com.example.rms.entity.Payment;
 import com.example.rms.repository.PaymentRepository;
 import com.example.rms.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;

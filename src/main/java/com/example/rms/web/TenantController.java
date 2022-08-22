@@ -1,6 +1,6 @@
 package com.example.rms.web;
 
-import com.example.rms.domain.Tenants;
+import com.example.rms.entity.Tenants;
 import com.example.rms.services.TenantsService;
 import org.springframework.web.bind.annotation.*;
 
