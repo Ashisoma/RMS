@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/v1/admin")
+@RequestMapping(path = "api/v1/rms/admin")
 public class AdminController {
 
 
@@ -36,7 +36,7 @@ public class AdminController {
     }
 
     //POST
-    @PostMapping(path = "/registerAdmin")
+    @PostMapping(path = "/add")
     public void registerNewAdmin(@RequestBody Admin admin){
         adminService.addNewAdmin(admin);
     }
@@ -50,7 +50,8 @@ public class AdminController {
                             @RequestParam(required = false)String gender,
                             @RequestParam(required = false)Integer nationalId,
                             @RequestParam(required = false) String password){
-        adminService.updateStudent(adminId,fname,lname,email,gender,nationalId,password);
+        // you can't update the admin coz the columns are nullable  = fa;se
+        adminService.updateAdmin(adminId,fname,lname,email,gender,nationalId,password);
     }
 
     // DELETE

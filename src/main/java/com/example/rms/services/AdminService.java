@@ -36,24 +36,26 @@ public class AdminService {
     // ADD
     // AN ADMIN
     public void addNewAdmin(Admin admin) {
-        Optional<Admin> adminByNatId, adminByNatId2;
+        Optional<Admin> adminByNatId, adminByEmail;
         adminByNatId = adminRepository.findByNationalId(admin.getNationalId());
-        adminByNatId2 = adminRepository.findByEmail(admin.getEmail());
+        adminByEmail = adminRepository.findByEmail(admin.getEmail());
 
-        if(adminByNatId.isPresent()){
-            throw new IllegalStateException("National id already exists");
-        }
-
-        if(adminByNatId2.isPresent()){
+//        if(adminByNatId.isPresent()){
+//            throw new IllegalStateException("National id already exists");
+//
+//        }
+        if(adminByEmail.isPresent()){
             throw new IllegalStateException("Email already exists");
         }
-        adminRepository.save(admin);
+        else {
+            adminRepository.save(admin);
+        }
 
     }
     // UPDATE
 
     @Transactional
-    public void updateStudent(Long adminId, String fname, String lname, String email, String gender, Integer nationalId, String password) {
+    public void updateAdmin(Long adminId, String fname, String lname, String email, String gender, Integer nationalId, String password) {
         Admin admin = adminRepository.findById(adminId).orElseThrow( () ->
                 new IllegalStateException("Admin with id :" + adminId + "does not exist"));
         if (fname != null && fname.length()>0 && !Objects.equals(admin.getF_name(), fname))
@@ -92,13 +94,13 @@ public class AdminService {
         }
     }
 
-    // DELETE
-    public void deleteAdminById(Long adminId){
-        boolean admin_exists = adminRepository.existsById(adminId);
-        if(!admin_exists){
-            throw new IllegalStateException("Admin with id "+ adminId + " does not exist");
+        // DELETE
+        public void deleteAdminById(Long adminId){
+            boolean admin_exists = adminRepository.existsById(adminId);
+            if(!admin_exists){
+                throw new IllegalStateException("Admin with id "+ adminId + " does not exist");
+            }
+            adminRepository.deleteById(adminId);
         }
-        adminRepository.deleteById(adminId);
-    }
 
 }
