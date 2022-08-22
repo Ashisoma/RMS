@@ -1,4 +1,4 @@
-package com.example.rms.domain;
+package com.example.rms.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

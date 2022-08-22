@@ -1,6 +1,6 @@
 package com.example.rms.web;
 
-import com.example.rms.domain.Houses;
+import com.example.rms.entity.Houses;
 import com.example.rms.services.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

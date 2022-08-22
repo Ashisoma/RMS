@@ -1,13 +1,12 @@
 package com.example.rms.config;
 
-import com.example.rms.domain.Admin;
+import com.example.rms.entity.Admin;
 import com.example.rms.repository.AdminRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Configuration
 public class AdminConfig {

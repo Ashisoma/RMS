@@ -1,16 +1,12 @@
 package com.example.rms.web;
 
-import com.example.rms.domain.Houses;
-import com.example.rms.domain.Payment;
-import com.example.rms.domain.Tenants;
+import com.example.rms.entity.Payment;
 import com.example.rms.repository.PaymentRepository;
 import com.example.rms.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
