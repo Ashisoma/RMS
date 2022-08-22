@@ -1,4 +1,4 @@
-package com.example.rms.domain;
+package com.example.rms.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
