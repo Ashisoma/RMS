@@ -1,13 +1,24 @@
 package com.example.rms.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table
+@Table(name = "houses")
 @Entity
-public class Houses extends Admin{
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Houses {
 
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     @Id
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
@@ -24,94 +35,40 @@ public class Houses extends Admin{
     @Column(name = "is_occupied",nullable = false)
     private boolean isOccupied;
 
+
+    // RELATIONSHIP
     @ManyToOne
-    @JoinColumn(name = "owned_by_id")
+    @JoinColumn(name = "owned_by_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "admin_house_fk"
+            )
+    )
     private Admin ownedBy;
 
-    public Admin getOwnedBy() {
-        return ownedBy;
-    }
-
     // TODO: 25/10/2021 finish this editing
-    @ManyToOne
-    @JoinColumn(name = "tenant_id")
+    @OneToOne
+    @JoinColumn(name = "tenant_id",
+            referencedColumnName = "id"
+    )
     private Tenants tenant;
 
-    public Tenants getTenant() {
-        return tenant;
-    }
-
-
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "houses",
+            cascade = {CascadeType.PERSIST,CascadeType.REMOVE}
+    )
     private List<Payment> paymentsMade = new ArrayList<>();
 
-    public Houses() {
+    // END OF RELATIONSHIPS
+
+    // this one should work just fine, many to one
+    public void enrollAdmin(Admin admin) {
+        this.ownedBy = admin;
     }
 
-    // todo inheritance in spring boot to get data from the two tables and display for the house, admin, tenant, payments
-
-    public Houses(Long id, String houseNumber, String features, Float rent, boolean isOccupied) {
-        this.id = id;
-        this.houseNumber = houseNumber;
-        this.features = features;
-        this.rent = rent;
-        this.isOccupied = isOccupied;
-    }
-
-    public Houses(String houseNumber, String features, Float rent, boolean isOccupied) {
-        this.houseNumber = houseNumber;
-        this.features = features;
-        this.rent = rent;
-        this.isOccupied = isOccupied;
-    }
-
-    @Override
-    public String toString() {
-        return "Houses{" +
-                "id=" + id +
-                ", houseNumber='" + houseNumber + '\'' +
-                ", features='" + features + '\'' +
-                ", rent=" + rent +
-                ", isOccupied=" + isOccupied +
-                '}';
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public String getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(String features) {
-        this.features = features;
-    }
-
-    public Float getRent() {
-        return rent;
-    }
-
-    public void setRent(Float rent) {
-        this.rent = rent;
-    }
-
-    public boolean isOccupied() {
-        return isOccupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        isOccupied = occupied;
+    // this is one to one so not yet tried out
+    public void addTenant(Tenants tenant) {
+        this.tenant = tenant;
     }
 }

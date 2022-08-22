@@ -36,18 +36,20 @@ public class AdminService {
     // ADD
     // AN ADMIN
     public void addNewAdmin(Admin admin) {
-        Optional<Admin> adminByNatId, adminByNatId2;
+        Optional<Admin> adminByNatId, adminByEmail;
         adminByNatId = adminRepository.findByNationalId(admin.getNationalId());
-        adminByNatId2 = adminRepository.findByEmail(admin.getEmail());
+        adminByEmail = adminRepository.findByEmail(admin.getEmail());
 
-        if(adminByNatId.isPresent()){
-            throw new IllegalStateException("National id already exists");
-        }
-
-        if(adminByNatId2.isPresent()){
+//        if(adminByNatId.isPresent()){
+//            throw new IllegalStateException("National id already exists");
+//
+//        }
+        if(adminByEmail.isPresent()){
             throw new IllegalStateException("Email already exists");
         }
-        adminRepository.save(admin);
+        else {
+            adminRepository.save(admin);
+        }
 
     }
     // UPDATE
